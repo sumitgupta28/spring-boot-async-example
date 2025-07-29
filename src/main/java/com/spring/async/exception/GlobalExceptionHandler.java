@@ -1,7 +1,6 @@
 package com.spring.async.exception;
 
 import com.spring.async.model.OrderResponse;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
