@@ -1,4 +1,4 @@
-package com.spring.async.completable.service;
+package com.spring.async.completable.service.subservice;
 
 import com.spring.async.common.CommonUtil;
 import com.spring.async.model.OrderRequest;
@@ -6,17 +6,13 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
-import java.util.concurrent.CompletableFuture;
 
 @Service
-public class CompletableNotificationService {
+public class CompletableFutureOrderFulfilmentService {
 
     @Async("threadPoolTaskExecutor")
-    public CompletableFuture<Boolean> sendNotification(OrderRequest orderRequest)
-    {
+    public void orderFulfilmentService(OrderRequest orderRequest) {
         CommonUtil.sleepService(Duration.ofSeconds(2));
-        return CompletableFuture.completedFuture(true);
-
     }
 
 }

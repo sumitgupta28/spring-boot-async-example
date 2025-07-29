@@ -1,15 +1,11 @@
 package com.spring.async.exception;
 
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
 @Getter
 public class OrderProcessingException extends  RuntimeException {
-
-    private String message;
-    private String oderId;
-    public OrderProcessingException(String message,final String orderId) {
-        super(message);
-        this.message = message;
-        this.oderId = orderId;
-    }
+    private final String message;
+    private final String oderId;
 }
