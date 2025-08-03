@@ -3,9 +3,9 @@ package com.spring.async.controller;
 import com.spring.async.exception.OrderProcessingException;
 import com.spring.async.model.OrderRequest;
 import com.spring.async.model.OrderResponse;
-import com.spring.async.services.NotificationService;
-import com.spring.async.services.OrderFulfilmentService;
 import com.spring.async.services.OrderProcessService;
+import com.spring.async.services.subservice.NotificationService;
+import com.spring.async.services.subservice.OrderFulfilmentService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.MDC;
 import org.springframework.http.MediaType;
@@ -48,7 +48,7 @@ public class CartService {
         }finally {
             MDC.clear();
         }
-
     }
+
 
 }

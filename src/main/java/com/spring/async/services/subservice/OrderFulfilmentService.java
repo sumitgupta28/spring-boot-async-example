@@ -1,4 +1,4 @@
-package com.spring.async.services;
+package com.spring.async.services.subservice;
 
 import com.spring.async.common.CommonUtil;
 import com.spring.async.model.OrderRequest;
@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service;
 import java.time.Duration;
 
 @Service
-public class NotificationService {
+public class OrderFulfilmentService {
 
     @Async("threadPoolTaskExecutor")
-    public void sendNotification(OrderRequest orderRequest)
+    public void orderFulfilmentService(OrderRequest orderRequest)
     {
         CommonUtil.sleepService(Duration.ofSeconds(2));
     }

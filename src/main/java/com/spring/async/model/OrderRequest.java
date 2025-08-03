@@ -13,5 +13,7 @@ public class OrderRequest {
     private String itemName;
     private String quantity;
     private String price;
+    private String paymentConfirmationId;
+    private Boolean paymentStatus;
 
 }

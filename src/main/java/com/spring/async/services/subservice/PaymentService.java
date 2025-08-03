@@ -1,8 +1,7 @@
-package com.spring.async.services;
+package com.spring.async.services.subservice;
 
 import com.spring.async.common.CommonUtil;
 import com.spring.async.model.OrderRequest;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -10,11 +9,9 @@ import java.time.Duration;
 
 @Service
 @Slf4j
-@RequiredArgsConstructor
-public class InventoryService {
+public class PaymentService {
 
-
-    public boolean validateInventory(OrderRequest orderRequest)  {
+    public boolean processPayment(OrderRequest orderRequest)  {
         CommonUtil.sleepService(Duration.ofSeconds(1));
         return true;
     }

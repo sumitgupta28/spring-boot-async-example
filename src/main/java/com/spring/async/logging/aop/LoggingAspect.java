@@ -13,7 +13,7 @@ import org.springframework.util.StopWatch;
 @Slf4j
 public class LoggingAspect {
 
-    @Pointcut("execution(public * com.spring.async.services.*.*(..))")
+    @Pointcut("execution(public * com.spring.async.services.*.*.*(..)) || execution(public * com.spring.async.completable.service.*.*.*(..))")
     private void allPublicServiceMethods() {
     }
 

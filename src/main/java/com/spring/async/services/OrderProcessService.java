@@ -2,6 +2,8 @@ package com.spring.async.services;
 
 import com.spring.async.exception.OrderProcessingException;
 import com.spring.async.model.OrderRequest;
+import com.spring.async.services.subservice.InventoryService;
+import com.spring.async.services.subservice.PaymentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

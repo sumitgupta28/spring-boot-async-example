@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.Duration;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executors;
 
 @Service
 @Slf4j
@@ -16,8 +17,10 @@ public class CompletableInventoryService {
 
 
     public CompletableFuture<Boolean> validateInventory(OrderRequest orderRequest)  {
-        CommonUtil.sleepService(Duration.ofSeconds(1));
-        return CompletableFuture.completedFuture(true);
+        return CompletableFuture.supplyAsync(() -> {
+            CommonUtil.sleepService(Duration.ofSeconds(1));
+            return Boolean.TRUE;
+        }, Executors.newSingleThreadExecutor()); // Use a dedicated executor for this task
     }
 
 }
