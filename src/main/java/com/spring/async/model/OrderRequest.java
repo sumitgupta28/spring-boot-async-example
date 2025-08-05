@@ -15,5 +15,6 @@ public class OrderRequest {
     private String price;
     private String paymentConfirmationId;
     private Boolean paymentStatus;
+    private Boolean inventoryConfirmation;
 
 }

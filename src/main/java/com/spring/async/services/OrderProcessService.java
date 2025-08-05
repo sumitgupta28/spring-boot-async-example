@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-import java.util.UUID;
+
 
 @Service
 @RequiredArgsConstructor
@@ -18,16 +18,15 @@ public class OrderProcessService {
     final PaymentService paymentService;
 
 
-    public Optional<String> processOrder(OrderRequest orderRequest) {
+    public Optional<OrderRequest> processOrder(OrderRequest orderRequest) {
         String orderConfirmationNumber = null;
-       boolean inventoryStatus = inventoryService.validateInventory(orderRequest);
-       if(inventoryStatus)
+        orderRequest = inventoryService.validateInventory(orderRequest);
+        if (orderRequest.getInventoryConfirmation())
        {
-          boolean paymentStatus= paymentService.processPayment(orderRequest);
-          if (paymentStatus)
+           orderRequest = paymentService.paymentService(orderRequest);
+           if (orderRequest.getPaymentStatus())
           {
-              orderConfirmationNumber = UUID.randomUUID().toString();
-              return Optional.of(orderConfirmationNumber);
+              return Optional.of(orderRequest);
           } else
           {
              throw new OrderProcessingException("Payment Unsuccessful !!",orderRequest.getOrderId());

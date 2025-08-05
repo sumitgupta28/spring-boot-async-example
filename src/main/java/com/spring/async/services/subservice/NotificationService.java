@@ -1,19 +1,20 @@
 package com.spring.async.services.subservice;
 
-import com.spring.async.common.CommonUtil;
 import com.spring.async.model.OrderRequest;
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.MediaType;
 import org.springframework.scheduling.annotation.Async;
-import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PostMapping;
 
-import java.time.Duration;
+import java.util.concurrent.CompletableFuture;
 
-@Service
-public class NotificationService {
+
+@FeignClient(name = "notification-service-client", url = "http://localhost:8080")
+public interface NotificationService {
 
     @Async("threadPoolTaskExecutor")
-    public void sendNotification(OrderRequest orderRequest)
-    {
-        CommonUtil.sleepService(Duration.ofSeconds(2));
-    }
+    @PostMapping(value = "/notification-service", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    CompletableFuture<OrderRequest> notificationService(OrderRequest orderRequest);
+
 
 }

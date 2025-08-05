@@ -1,22 +1,14 @@
 package com.spring.async.services.subservice;
 
-import com.spring.async.common.CommonUtil;
 import com.spring.async.model.OrderRequest;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
-
-import java.time.Duration;
-
-@Service
-@Slf4j
-@RequiredArgsConstructor
-public class InventoryService {
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PostMapping;
 
 
-    public boolean validateInventory(OrderRequest orderRequest)  {
-        CommonUtil.sleepService(Duration.ofSeconds(1));
-        return true;
-    }
+@FeignClient(name = "inventory-service-client", url = "http://localhost:8080")
+public interface InventoryService {
 
+    @PostMapping(value = "/inventory-service", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    OrderRequest validateInventory(OrderRequest orderRequest);
 }

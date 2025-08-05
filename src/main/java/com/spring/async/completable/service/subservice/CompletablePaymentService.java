@@ -18,7 +18,7 @@ public class CompletablePaymentService {
 
 
         return CompletableFuture.supplyAsync(() -> {
-            CommonUtil.sleepService(Duration.ofSeconds(1));
+            CommonUtil.sleepService(Duration.ofMillis(300));
             orderRequest.setPaymentConfirmationId(UUID.randomUUID().toString());
             orderRequest.setPaymentStatus(Boolean.TRUE);
             return orderRequest;

@@ -18,7 +18,7 @@ public class CompletableInventoryService {
 
     public CompletableFuture<Boolean> validateInventory(OrderRequest orderRequest)  {
         return CompletableFuture.supplyAsync(() -> {
-            CommonUtil.sleepService(Duration.ofSeconds(1));
+            CommonUtil.sleepService(Duration.ofMillis(300));
             return Boolean.TRUE;
         }, Executors.newSingleThreadExecutor()); // Use a dedicated executor for this task
     }

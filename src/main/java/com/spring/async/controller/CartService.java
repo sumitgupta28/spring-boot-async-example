@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 
 @RestController
 @RequestMapping("order")
@@ -31,12 +32,12 @@ public class CartService {
 
         try{
             MDC.put("orderId",orderRequest.getOrderId());
-            Optional<String> orderConfirmationId = orderProcessService.processOrder(orderRequest);
-            if(orderConfirmationId.isPresent()){
-                notificationService.sendNotification(orderRequest);
-                orderFulfilmentService.orderFulfilmentService(orderRequest);
+            Optional<OrderRequest> updatedOrderStatus = orderProcessService.processOrder(orderRequest);
+            if (updatedOrderStatus.isPresent()) {
+                CompletableFuture<OrderRequest> completableFutureNotification = notificationService.notificationService(orderRequest);
+                CompletableFuture<OrderRequest> completableFutureOrderFullfillment = orderFulfilmentService.orderFulfilmentService(orderRequest);
                 OrderResponse orderResponse= OrderResponse.builder()
-                        .orderConfirmationId(orderConfirmationId.get())
+                        .orderConfirmationId(updatedOrderStatus.get().getPaymentConfirmationId())
                         .orderId(orderRequest.getOrderId())
                         .message("Processed Successfully").build();
                 return ResponseEntity.ok().body(orderResponse);

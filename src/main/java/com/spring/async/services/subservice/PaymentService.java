@@ -1,19 +1,14 @@
 package com.spring.async.services.subservice;
 
-import com.spring.async.common.CommonUtil;
 import com.spring.async.model.OrderRequest;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PostMapping;
 
-import java.time.Duration;
+@FeignClient(name = "payment-service-client", url = "http://localhost:8080")
+public interface PaymentService {
 
-@Service
-@Slf4j
-public class PaymentService {
-
-    public boolean processPayment(OrderRequest orderRequest)  {
-        CommonUtil.sleepService(Duration.ofSeconds(1));
-        return true;
-    }
+    @PostMapping(value = "/payment-service", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    OrderRequest paymentService(OrderRequest orderRequest);
 
 }
