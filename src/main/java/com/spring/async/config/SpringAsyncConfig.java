@@ -23,12 +23,8 @@ public class SpringAsyncConfig {
         threadPoolTaskExecutor.setQueueCapacity(500); // Capacity of the queue for holding submitted tasks
         threadPoolTaskExecutor.setThreadNamePrefix("MyAsyncTask-"); // Prefix for the names of threads in the pool
         threadPoolTaskExecutor.setRejectedExecutionHandler(new java.util.concurrent.ThreadPoolExecutor.CallerRunsPolicy()); // Example: use CallerRunsPolicy
-
-
         threadPoolTaskExecutor.initialize(); // Initializes the executor
-
         // Configure other properties like corePoolSize, maxPoolSize, queueCapacity if needed
-
          return threadPoolTaskExecutor;
     }
 }
